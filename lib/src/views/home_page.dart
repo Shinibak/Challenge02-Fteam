@@ -1,3 +1,4 @@
+import 'package:challenge02_fteam/src/widgets/custom_container_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -5,8 +6,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // Just like you'd use Theme.of or MediaQuery.of
-        Container(
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: 2,
+        itemBuilder: (BuildContext context, int index) {
+          return const CustomContainer();
+        },
+      ),
     );
   }
 }
