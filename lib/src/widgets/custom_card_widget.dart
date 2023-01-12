@@ -37,9 +37,7 @@ class _CustomCardState extends State<CustomCard> {
                       color: widget.petsData.cor,
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
-                        image: ExactAssetImage(
-                          widget.petsData.photos[0],
-                        ),
+                        image: ExactAssetImage(widget.petsData.photos[0]),
                       ),
                     ),
                     height: screenSize.height * 0.15,

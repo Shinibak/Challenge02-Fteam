@@ -81,6 +81,10 @@ class HomePage extends StatelessWidget {
                       itemCount: listPets.length,
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/two',
+                                arguments: listPets[index]);
+                          },
                           child: CustomCard(petsData: listPets[index]),
                         );
                       },

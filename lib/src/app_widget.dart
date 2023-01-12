@@ -1,4 +1,5 @@
 import 'package:challenge02_fteam/src/theme/theme_constants.dart';
+import 'package:challenge02_fteam/src/views/adopt_page.dart';
 import 'package:challenge02_fteam/src/views/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,11 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: lightTheme,
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/two': (context) => const AdoptPage(),
+      },
     );
   }
 }

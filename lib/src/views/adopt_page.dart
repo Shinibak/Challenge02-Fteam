@@ -1,23 +1,28 @@
+import 'package:challenge02_fteam/src/widgets/custom_container_image_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../models/pets_adopt_model.dart';
 
-class MyWidget extends StatefulWidget {
-  final PetsAdoptModel petsData;
-  const MyWidget({super.key, required this.petsData});
+class AdoptPage extends StatefulWidget {
+  const AdoptPage({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<AdoptPage> createState() => _AdoptPageState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _AdoptPageState extends State<AdoptPage> {
   bool ontap = false;
   @override
   Widget build(BuildContext context) {
+    final petsData =
+        ModalRoute.of(context)!.settings.arguments as PetsAdoptModel;
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: screenSize.height * 0.030,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -26,8 +31,10 @@ class _MyWidgetState extends State<MyWidget> {
                   color: ontap
                       ? const Color.fromARGB(255, 255, 187, 182)
                       : const Color.fromARGB(255, 160, 160, 160),
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(10),
                 ),
+                height: screenSize.height * 0.05,
+                width: screenSize.width * 0.10,
                 child: GestureDetector(
                   onTap: () {
                     setState(
@@ -39,8 +46,12 @@ class _MyWidgetState extends State<MyWidget> {
                   child: Icon(
                     Icons.favorite,
                     color: ontap ? Colors.red : Colors.black,
+                    size: screenSize.height * 0.03,
                   ),
                 ),
+              ),
+              SizedBox(
+                width: screenSize.width * 0.02,
               ),
             ],
           ),
@@ -48,10 +59,22 @@ class _MyWidgetState extends State<MyWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.petsData.name),
-                  Text(widget.petsData.race),
+                  Text(
+                    petsData.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 33,
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenSize.height * 0.006,
+                  ),
+                  Text(petsData.race),
+                  SizedBox(
+                    height: screenSize.height * 0.006,
+                  ),
                   Row(
                     children: [
                       Icon(
@@ -59,50 +82,80 @@ class _MyWidgetState extends State<MyWidget> {
                         Icons.location_on,
                         color: Colors.amber[900],
                       ),
-                      Text(widget.petsData.location),
+                      Text(
+                        petsData.location,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 167, 167, 167)),
+                      ),
                     ],
                   ),
                 ],
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  if (widget.petsData.sex == 'Male')
-                    const Icon(Icons.female)
+                  if (petsData.sex == 'Male')
+                    const Icon(
+                      Icons.female,
+                      color: Color.fromARGB(255, 167, 167, 167),
+                    )
                   else
-                    const Icon(Icons.male),
-                  Text(widget.petsData.age),
+                    const Icon(
+                      Icons.male,
+                      color: Color.fromARGB(255, 167, 167, 167),
+                    ),
+                  Text(
+                    petsData.age,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ],
               )
             ],
           ),
           Row(
             children: [
+              SizedBox(
+                width: screenSize.width * 0.01,
+              ),
               Expanded(
                 flex: 2,
                 child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: widget.petsData.photos.length-1,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          child: CustomContainer(petsData: widget.petsData.photos[index+1]),
-                        );
-                      },
-                    ),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: petsData.photos.length - 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      child: CustomContainerImage(
+                          photos: petsData.photos[index + 1]),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                width: screenSize.width * 0.01,
               ),
               Expanded(
                 flex: 8,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.petsData.cor,
-                    borderRadius: BorderRadius.circular(50),
+                    color: petsData.cor,
+                    borderRadius: BorderRadius.circular(200),
                   ),
-                  child: Image.asset(widget.petsData.photos[0]),
+                  height: screenSize.height * 0.40,
+                  child: Image.asset(petsData.photos[0]),
                 ),
               ),
             ],
           ),
+          const Text(
+            'About',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          Text(
+            petsData.description,
+            style:
+                DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.24),
+          )
         ],
       ),
     );
