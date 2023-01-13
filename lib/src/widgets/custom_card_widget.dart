@@ -17,7 +17,7 @@ class _CustomCardState extends State<CustomCard> {
     var screenSize = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(25),
       ),
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 15),
@@ -50,9 +50,22 @@ class _CustomCardState extends State<CustomCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.petsData.name),
-                      Text(widget.petsData.race),
-                      Text('${widget.petsData.sex}, ${widget.petsData.age}'),
+                      Text(
+                        widget.petsData.name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      Text(
+                        widget.petsData.race,
+                        style: const TextStyle(fontSize: 13),
+                      ),
+                      Text(
+                        '${widget.petsData.sex}, ${widget.petsData.age}',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Color.fromARGB(255, 167, 167, 167),
+                        ),
+                      ),
                       SizedBox(
                         height: screenSize.height * 0.010,
                       ),
@@ -63,7 +76,13 @@ class _CustomCardState extends State<CustomCard> {
                             Icons.location_on,
                             color: Colors.amber[900],
                           ),
-                          Text(widget.petsData.location),
+                          Text(
+                            widget.petsData.location,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Color.fromARGB(255, 167, 167, 167),
+                            ),
+                          ),
                         ],
                       ),
                     ],

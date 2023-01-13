@@ -1,5 +1,5 @@
 import 'package:challenge02_fteam/src/mocap/pets_data.dart';
-import 'package:challenge02_fteam/src/widgets/Custom_button_widget.dart';
+import 'package:challenge02_fteam/src/widgets/custom_button_widget.dart';
 import 'package:challenge02_fteam/src/widgets/custom_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var listPets = petsDataList;
+    final listPets = petsDataList;
+
     return Scaffold(
       body: Column(
         children: [
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
             flex: 7,
             child: Container(
               decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 252, 143, 1),
+                color: Color.fromARGB(255, 255, 210, 210),
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(25),
                   bottom: Radius.circular(0),
@@ -60,17 +61,15 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: screenSize.height * 0.01,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CustomButton(icon: 'options', textButton: ''),
-                        CustomButton(icon: 'Dogs', textButton: 'Dogs'),
-                        CustomButton(icon: 'Cats', textButton: 'Cats'),
-                        CustomButton(icon: 'Birds', textButton: 'Birds'),
-                      ],
-                    ),
+                  
+                  Row(
+                    children: const [
+                      CustomButton(text: '', icon: 'images/Icons/options.png'),
+                      CustomButton(text: 'Dogs', icon: 'images/Icons/Dogs.png'),
+                      CustomButton(text: 'Cats', icon: 'images/Icons/Cats.png'),
+                      CustomButton(
+                          text: 'Birds', icon: 'images/Icons/Birds.png'),
+                    ],
                   ),
                   Container(
                     decoration: const BoxDecoration(),

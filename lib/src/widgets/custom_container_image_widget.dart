@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CustomContainerImage extends StatelessWidget {
+class CustomContainerImage extends StatefulWidget {
   final String photos;
   const CustomContainerImage({super.key, required this.photos});
 
+  @override
+  State<CustomContainerImage> createState() => _CustomContainerImageState();
+}
+
+class _CustomContainerImageState extends State<CustomContainerImage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -18,7 +23,7 @@ class CustomContainerImage extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
           image: DecorationImage(
-            image: ExactAssetImage(photos),
+            image: ExactAssetImage(widget.photos),
           ),
         ),
         height: screenSize.height * 0.08,
