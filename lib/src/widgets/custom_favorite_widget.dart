@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CustomFavorite extends StatefulWidget {
-  const CustomFavorite({super.key});
+class CustomFavoriteWidget extends StatefulWidget {
+  const CustomFavoriteWidget({super.key});
 
   @override
-  State<CustomFavorite> createState() => _CustomFavoriteState();
+  State<CustomFavoriteWidget> createState() => _CustomFavoriteWidgetState();
 }
 
-class _CustomFavoriteState extends State<CustomFavorite> {
+class _CustomFavoriteWidgetState extends State<CustomFavoriteWidget> {
   bool ontap = false;
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
         color: ontap

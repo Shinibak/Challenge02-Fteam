@@ -1,6 +1,6 @@
 import 'package:flutter/animation.dart';
 
-class PetsAdoptModel {
+class PetAdoptModel {
   final String name;
   final String location;
   final String race;
@@ -10,7 +10,7 @@ class PetsAdoptModel {
   final String description;
   final Color cor;
 
-  PetsAdoptModel({
+  const PetAdoptModel({
     required this.name,
     required this.location,
     required this.race,

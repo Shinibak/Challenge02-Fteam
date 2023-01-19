@@ -1,28 +1,27 @@
-import 'package:challenge02_fteam/src/models/pets_adopt_model.dart';
+import 'package:challenge02_fteam/src/models/pet_adopt_model.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatefulWidget {
-  final PetsAdoptModel petsData;
-  const CustomCard({super.key, required this.petsData});
+class CustomCardWidget extends StatefulWidget {
+  final PetAdoptModel petsData;
+  const CustomCardWidget({super.key, required this.petsData});
 
   @override
-  State<CustomCard> createState() => _CustomCardState();
+  State<CustomCardWidget> createState() => _CustomCardWidgetState();
 }
 
-class _CustomCardState extends State<CustomCard> {
+class _CustomCardWidgetState extends State<CustomCardWidget> {
   bool ontap = false;
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     return Container(
+      height: screenSize.height * 0.15,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
       ),
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 15),
-      height: screenSize.height * 0.15,
-      width: screenSize.width,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -33,6 +32,8 @@ class _CustomCardState extends State<CustomCard> {
               child: Row(
                 children: [
                   Container(
+                    height: screenSize.height * 0.15,
+                    width: screenSize.width * 0.25,
                     decoration: BoxDecoration(
                       color: widget.petsData.cor,
                       borderRadius: BorderRadius.circular(25),
@@ -40,8 +41,6 @@ class _CustomCardState extends State<CustomCard> {
                         image: ExactAssetImage(widget.petsData.photos[0]),
                       ),
                     ),
-                    height: screenSize.height * 0.15,
-                    width: screenSize.width * 0.25,
                   ),
                   SizedBox(
                     width: screenSize.width * 0.03,
@@ -106,7 +105,7 @@ class _CustomCardState extends State<CustomCard> {
                         );
                       },
                       child: Icon(
-                        Icons.favorite,
+                        Icons.favorite_border_outlined,
                         color: ontap ? Colors.red : Colors.black,
                       ),
                     ),
