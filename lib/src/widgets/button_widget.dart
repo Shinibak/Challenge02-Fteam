@@ -30,7 +30,9 @@ class ButtonWidget extends StatelessWidget {
             child: SizedBox(
               height: screenSize.width * 0.064,
               width: screenSize.width * 0.064,
-              child: Image.asset(buttonsList.icon),
+              child: Image.asset(
+                buttonsList.icon,
+              ),
             ),
           ),
           Text(

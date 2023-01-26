@@ -12,9 +12,6 @@ class ListViewWidget extends StatelessWidget {
       width: screenSize.width * 0.192,
       child: Stack(
         children: [
-          const Expanded(
-            child: SizedBox(),
-          ),
           ListView.builder(
             itemCount: photosList.length,
             itemBuilder: (BuildContext context, int index) {
@@ -28,13 +25,13 @@ class ListViewWidget extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: screenSize.width * 0.16,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.center,
                   colors: [
                     Colors.white,
-                    Colors.transparent,
+                    Colors.white.withOpacity(0.1),
                   ],
                 ),
               ),
