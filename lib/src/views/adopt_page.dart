@@ -1,7 +1,7 @@
-import 'package:challenge02_fteam/src/widgets/custom_container_image_widget.dart';
+import 'package:challenge02_fteam/src/widgets/list_view_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/pet_adopt_model.dart';
-import '../widgets/custom_favorite_widget.dart';
+import '../widgets/favorite_widget.dart';
 
 class AdoptPage extends StatefulWidget {
   const AdoptPage({super.key});
@@ -13,143 +13,156 @@ class AdoptPage extends StatefulWidget {
 class _AdoptPageState extends State<AdoptPage> {
   @override
   Widget build(BuildContext context) {
-    final petsData =
-        ModalRoute.of(context)!.settings.arguments as PetAdoptModel;
-    var screenSize = MediaQuery.of(context).size;
+    final petData = ModalRoute.of(context)!.settings.arguments as PetAdoptModel;
+    final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: screenSize.width * 0.21,
+        flexibleSpace: Padding(
+          padding: EdgeInsets.only(
+            top: screenSize.width * 0.074,
+            right: screenSize.width * 0.069,
+            bottom: screenSize.width * 0.021,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: const [
+              FavoriteWidget(),
+            ],
+          ),
+        ),
+      ),
       body: Column(
         children: [
-          Stack(children: [
-            SizedBox(
-              height: screenSize.height * 0.081,
-              width: screenSize.width,
-            ),
-            const Positioned(
-              right: 30,
-              top: 20,
-              child: CustomFavoriteWidget(),
-            ),
-            Positioned(
-              left: 30,
-              top: 20,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(Icons.arrow_back_ios),
-              ),
-            ),
-          ]),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          SizedBox(
+            height: screenSize.width * 0.344,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  right: screenSize.width * 0.069,
+                  left: screenSize.width * 0.069),
+              child: Row(
                 children: [
-                  Text(
-                    petsData.name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 33),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: screenSize.width * 0.069,
+                              bottom: screenSize.width * 0.048),
+                          child: Text(
+                            petData.name,
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(bottom: screenSize.width * 0.032),
+                          child: Text(
+                            petData.race,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              size: 18,
+                              Icons.location_on,
+                              color: Colors.amber[900],
+                            ),
+                            Text(
+                              petData.location,
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: screenSize.height * 0.006),
-                  Text(petsData.race),
-                  SizedBox(height: screenSize.height * 0.006),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Icon(
-                        size: 18,
-                        Icons.location_on,
-                        color: Colors.amber[900],
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: screenSize.width * 0.08,
+                            bottom: screenSize.width * 0.037),
+                        child: Icon(
+                          petData.sex == 'Female' ? Icons.female : Icons.male,
+                          color: const Color.fromARGB(255, 167, 167, 167),
+                          size: screenSize.width * 0.074,
+                        ),
                       ),
                       Text(
-                        petsData.location,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 167, 167, 167),
-                        ),
+                        petData.age,
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                     ],
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  if (petsData.sex != 'Male')
-                    const Icon(
-                      Icons.female,
-                      color: Color.fromARGB(255, 167, 167, 167),
-                    )
-                  else
-                    const Icon(
-                      Icons.male,
-                      color: Color.fromARGB(255, 167, 167, 167),
-                    ),
-                  Text(
-                    petsData.age,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-          Stack(children: [
-            Container(
-              height: screenSize.height * 0.40,
-            ),
-            Positioned(
-              left: screenSize.width * 0.02,
-              child: SizedBox(
-                height: screenSize.height * 0.4,
-                width: screenSize.width * 0.22,
-                child: ListView.builder(
-                  itemCount: petsData.photos.length - 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CustomContainerImageWidget(
-                        photos: petsData.photos[index + 1]);
-                  },
+          SizedBox(
+            height: screenSize.width * 0.94,
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: screenSize.width * 0.064,
+                      right: screenSize.width * 0.048,
+                      top: screenSize.width * 0.053),
+                  child: ListViewWidget(photosList: petData.photos),
                 ),
-              ),
-            ),
-            Positioned(
-              right: -25,
-              child: Container(
-                height: screenSize.height * 0.40,
-                width: screenSize.width * 0.8,
-                decoration: BoxDecoration(
-                  color: petsData.cor,
-                  borderRadius: BorderRadius.circular(600),
+                Expanded(
+                  child: Stack(children: [
+                    Positioned(
+                      left: 0,
+                      child: Container(
+                        height: screenSize.width * 0.93,
+                        width: screenSize.width * 0.95,
+                        decoration: BoxDecoration(
+                          color: petData.cor,
+                          borderRadius: BorderRadius.circular(173.5),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: SizedBox(
+                          height: screenSize.width * 0.93,
+                          width: screenSize.width * 0.95,
+                          child: Image.asset(petData.photos[0])),
+                    ),
+                  ]),
                 ),
-              ),
+              ],
             ),
-            Positioned(
-              left: screenSize.width * 0.20,
-              child: SizedBox(
-                  height: screenSize.height * 0.40,
-                  width: screenSize.width * 0.9,
-                  child: Image.asset(petsData.photos[0])),
-            ),
-          ]),
+          ),
           Expanded(
             child: SizedBox(
               height: screenSize.height * 0.272,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 5),
+                  padding: EdgeInsets.only(
+                    right: screenSize.width * 0.069,
+                    left: screenSize.width * 0.069,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'About',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: screenSize.width * 0.026,
+                          bottom: screenSize.width * 0.042,
+                        ),
+                        child: Text('About',
+                            style: Theme.of(context).textTheme.headline6),
                       ),
                       Text(
-                        petsData.description,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 138, 138, 138),
-                        ),
+                        petData.description,
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],
                   ),
@@ -160,31 +173,28 @@ class _AdoptPageState extends State<AdoptPage> {
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
+              height: screenSize.width * 0.202,
+              width: screenSize.width * 0.58,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(237, 255, 145, 0),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50),
+                  topLeft: Radius.circular(56),
                 ),
               ),
-              height: screenSize.height * 0.09,
-              width: screenSize.width * 0.6,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.pets,
                     color: Colors.white,
+                    size: screenSize.width * 0.064,
                   ),
                   SizedBox(
-                    width: screenSize.width * 0.05,
+                    width: screenSize.width * 0.042,
                   ),
-                  const Text(
+                  Text(
                     'ADOPT',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.button,
                   ),
                 ],
               ),

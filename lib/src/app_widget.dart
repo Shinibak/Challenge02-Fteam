@@ -1,7 +1,8 @@
-import 'package:challenge02_fteam/src/theme/theme_constants.dart';
+
 import 'package:challenge02_fteam/src/views/adopt_page.dart';
 import 'package:challenge02_fteam/src/views/home_page.dart';
 import 'package:flutter/material.dart';
+import 'theme/theme_custom.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
